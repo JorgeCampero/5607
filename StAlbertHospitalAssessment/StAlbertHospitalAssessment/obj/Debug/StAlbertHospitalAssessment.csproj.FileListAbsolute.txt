@@ -1,0 +1,12 @@
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.csproj.AssemblyReference.cache
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.DataController.resources
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.MainMenu.resources
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.Properties.Resources.resources
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.csproj.GenerateResource.cache
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.csproj.CoreCompileInputs.cache
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\bin\Debug\StAlbertHospitalAssessment.exe.config
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\bin\Debug\StAlbertHospitalAssessment.exe
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\bin\Debug\StAlbertHospitalAssessment.pdb
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.exe
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.pdb
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.Add_Admission.resources
