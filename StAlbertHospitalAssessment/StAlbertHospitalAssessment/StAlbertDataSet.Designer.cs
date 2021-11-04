@@ -64,23 +64,23 @@ namespace StAlbertHospitalAssessment {
         
         private Wards1DataTable tableWards1;
         
-        private global::System.Data.DataRelation relationPatientsAdmissions;
+        private global::System.Data.DataRelation relationWards_Admissions;
         
-        private global::System.Data.DataRelation relationWardsAdmissions;
+        private global::System.Data.DataRelation relationPatients_Admissions;
         
-        private global::System.Data.DataRelation relationAdmissionsAllocation;
+        private global::System.Data.DataRelation relationDoctors_Allocation;
         
-        private global::System.Data.DataRelation relationDoctorsAllocation;
+        private global::System.Data.DataRelation relationAdmissions_Allocation;
         
-        private global::System.Data.DataRelation relationAdmissionsPayments;
+        private global::System.Data.DataRelation relationAdmissions_Payments;
         
-        private global::System.Data.DataRelation relationAdmissionsPrescriptions;
+        private global::System.Data.DataRelation relationMedication_Prescriptions;
         
-        private global::System.Data.DataRelation relationMedicationPrescriptions;
+        private global::System.Data.DataRelation relationAdmissions_Prescriptions;
         
-        private global::System.Data.DataRelation relationDoctorsResearch_Project;
+        private global::System.Data.DataRelation relationResearch_Topic_Research_Project;
         
-        private global::System.Data.DataRelation relationResearch_TopicResearch_Project;
+        private global::System.Data.DataRelation relationDoctors_Research_Project;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -668,15 +668,15 @@ namespace StAlbertHospitalAssessment {
                     this.tableWards1.InitVars();
                 }
             }
-            this.relationPatientsAdmissions = this.Relations["PatientsAdmissions"];
-            this.relationWardsAdmissions = this.Relations["WardsAdmissions"];
-            this.relationAdmissionsAllocation = this.Relations["AdmissionsAllocation"];
-            this.relationDoctorsAllocation = this.Relations["DoctorsAllocation"];
-            this.relationAdmissionsPayments = this.Relations["AdmissionsPayments"];
-            this.relationAdmissionsPrescriptions = this.Relations["AdmissionsPrescriptions"];
-            this.relationMedicationPrescriptions = this.Relations["MedicationPrescriptions"];
-            this.relationDoctorsResearch_Project = this.Relations["DoctorsResearch Project"];
-            this.relationResearch_TopicResearch_Project = this.Relations["Research TopicResearch Project"];
+            this.relationWards_Admissions = this.Relations["Wards_Admissions"];
+            this.relationPatients_Admissions = this.Relations["Patients_Admissions"];
+            this.relationDoctors_Allocation = this.Relations["Doctors_Allocation"];
+            this.relationAdmissions_Allocation = this.Relations["Admissions_Allocation"];
+            this.relationAdmissions_Payments = this.Relations["Admissions_Payments"];
+            this.relationMedication_Prescriptions = this.Relations["Medication_Prescriptions"];
+            this.relationAdmissions_Prescriptions = this.Relations["Admissions_Prescriptions"];
+            this.relationResearch_Topic_Research_Project = this.Relations["Research Topic_Research Project"];
+            this.relationDoctors_Research_Project = this.Relations["Doctors_Research Project"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -727,42 +727,106 @@ namespace StAlbertHospitalAssessment {
             base.Tables.Add(this.tableResearch_Topic1);
             this.tableWards1 = new Wards1DataTable();
             base.Tables.Add(this.tableWards1);
-            this.relationPatientsAdmissions = new global::System.Data.DataRelation("PatientsAdmissions", new global::System.Data.DataColumn[] {
+            global::System.Data.ForeignKeyConstraint fkc;
+            fkc = new global::System.Data.ForeignKeyConstraint("Wards_Admissions", new global::System.Data.DataColumn[] {
+                        this.tableWards.WardIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAdmissions.WardIDColumn});
+            this.tableAdmissions.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.None;
+            fkc = new global::System.Data.ForeignKeyConstraint("Patients_Admissions", new global::System.Data.DataColumn[] {
                         this.tablePatients.PatientIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableAdmissions.PatientIDColumn}, false);
-            this.Relations.Add(this.relationPatientsAdmissions);
-            this.relationWardsAdmissions = new global::System.Data.DataRelation("WardsAdmissions", new global::System.Data.DataColumn[] {
+                        this.tableAdmissions.PatientIDColumn});
+            this.tableAdmissions.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.None;
+            fkc = new global::System.Data.ForeignKeyConstraint("Doctors_Allocation", new global::System.Data.DataColumn[] {
+                        this.tableDoctors.DoctorIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAllocation.DoctorIDColumn});
+            this.tableAllocation.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.None;
+            fkc = new global::System.Data.ForeignKeyConstraint("Admissions_Allocation", new global::System.Data.DataColumn[] {
+                        this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAllocation.AdmissionIDColumn});
+            this.tableAllocation.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.None;
+            fkc = new global::System.Data.ForeignKeyConstraint("Admissions_Payments", new global::System.Data.DataColumn[] {
+                        this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePayments.AdmissionIDColumn});
+            this.tablePayments.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.None;
+            fkc = new global::System.Data.ForeignKeyConstraint("Medication_Prescriptions", new global::System.Data.DataColumn[] {
+                        this.tableMedication.MedicationIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePrescriptions.MedicationNameColumn});
+            this.tablePrescriptions.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.None;
+            fkc = new global::System.Data.ForeignKeyConstraint("Admissions_Prescriptions", new global::System.Data.DataColumn[] {
+                        this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePrescriptions.AdmissionIDColumn});
+            this.tablePrescriptions.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.None;
+            fkc = new global::System.Data.ForeignKeyConstraint("Research Topic_Research Project", new global::System.Data.DataColumn[] {
+                        this.tableResearch_Topic.ResearchTopicIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableResearch_Project.ResearchTopicIDColumn});
+            this.tableResearch_Project.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.None;
+            fkc = new global::System.Data.ForeignKeyConstraint("Doctors_Research Project", new global::System.Data.DataColumn[] {
+                        this.tableDoctors.DoctorIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableResearch_Project.DoctorIDColumn});
+            this.tableResearch_Project.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.None;
+            this.relationWards_Admissions = new global::System.Data.DataRelation("Wards_Admissions", new global::System.Data.DataColumn[] {
                         this.tableWards.WardIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableAdmissions.WardIDColumn}, false);
-            this.Relations.Add(this.relationWardsAdmissions);
-            this.relationAdmissionsAllocation = new global::System.Data.DataRelation("AdmissionsAllocation", new global::System.Data.DataColumn[] {
-                        this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableAllocation.AdmissionIDColumn}, false);
-            this.Relations.Add(this.relationAdmissionsAllocation);
-            this.relationDoctorsAllocation = new global::System.Data.DataRelation("DoctorsAllocation", new global::System.Data.DataColumn[] {
+            this.Relations.Add(this.relationWards_Admissions);
+            this.relationPatients_Admissions = new global::System.Data.DataRelation("Patients_Admissions", new global::System.Data.DataColumn[] {
+                        this.tablePatients.PatientIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAdmissions.PatientIDColumn}, false);
+            this.Relations.Add(this.relationPatients_Admissions);
+            this.relationDoctors_Allocation = new global::System.Data.DataRelation("Doctors_Allocation", new global::System.Data.DataColumn[] {
                         this.tableDoctors.DoctorIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableAllocation.DoctorIDColumn}, false);
-            this.Relations.Add(this.relationDoctorsAllocation);
-            this.relationAdmissionsPayments = new global::System.Data.DataRelation("AdmissionsPayments", new global::System.Data.DataColumn[] {
+            this.Relations.Add(this.relationDoctors_Allocation);
+            this.relationAdmissions_Allocation = new global::System.Data.DataRelation("Admissions_Allocation", new global::System.Data.DataColumn[] {
+                        this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAllocation.AdmissionIDColumn}, false);
+            this.Relations.Add(this.relationAdmissions_Allocation);
+            this.relationAdmissions_Payments = new global::System.Data.DataRelation("Admissions_Payments", new global::System.Data.DataColumn[] {
                         this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
                         this.tablePayments.AdmissionIDColumn}, false);
-            this.Relations.Add(this.relationAdmissionsPayments);
-            this.relationAdmissionsPrescriptions = new global::System.Data.DataRelation("AdmissionsPrescriptions", new global::System.Data.DataColumn[] {
-                        this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePrescriptions.AdmissionIDColumn}, false);
-            this.Relations.Add(this.relationAdmissionsPrescriptions);
-            this.relationMedicationPrescriptions = new global::System.Data.DataRelation("MedicationPrescriptions", new global::System.Data.DataColumn[] {
+            this.Relations.Add(this.relationAdmissions_Payments);
+            this.relationMedication_Prescriptions = new global::System.Data.DataRelation("Medication_Prescriptions", new global::System.Data.DataColumn[] {
                         this.tableMedication.MedicationIDColumn}, new global::System.Data.DataColumn[] {
                         this.tablePrescriptions.MedicationNameColumn}, false);
-            this.Relations.Add(this.relationMedicationPrescriptions);
-            this.relationDoctorsResearch_Project = new global::System.Data.DataRelation("DoctorsResearch Project", new global::System.Data.DataColumn[] {
-                        this.tableDoctors.DoctorIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableResearch_Project.DoctorIDColumn}, false);
-            this.Relations.Add(this.relationDoctorsResearch_Project);
-            this.relationResearch_TopicResearch_Project = new global::System.Data.DataRelation("Research TopicResearch Project", new global::System.Data.DataColumn[] {
+            this.Relations.Add(this.relationMedication_Prescriptions);
+            this.relationAdmissions_Prescriptions = new global::System.Data.DataRelation("Admissions_Prescriptions", new global::System.Data.DataColumn[] {
+                        this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePrescriptions.AdmissionIDColumn}, false);
+            this.Relations.Add(this.relationAdmissions_Prescriptions);
+            this.relationResearch_Topic_Research_Project = new global::System.Data.DataRelation("Research Topic_Research Project", new global::System.Data.DataColumn[] {
                         this.tableResearch_Topic.ResearchTopicIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableResearch_Project.ResearchTopicIDColumn}, false);
-            this.Relations.Add(this.relationResearch_TopicResearch_Project);
+            this.Relations.Add(this.relationResearch_Topic_Research_Project);
+            this.relationDoctors_Research_Project = new global::System.Data.DataRelation("Doctors_Research Project", new global::System.Data.DataColumn[] {
+                        this.tableDoctors.DoctorIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableResearch_Project.DoctorIDColumn}, false);
+            this.Relations.Add(this.relationDoctors_Research_Project);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1137,7 +1201,7 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AdmissionsRow AddAdmissionsRow(string Description, System.DateTime AdmissionDate, string Status, PatientsRow parentPatientsRowByPatientsAdmissions, WardsRow parentWardsRowByWardsAdmissions) {
+            public AdmissionsRow AddAdmissionsRow(string Description, System.DateTime AdmissionDate, string Status, PatientsRow parentPatientsRowByPatients_Admissions, WardsRow parentWardsRowByWards_Admissions) {
                 AdmissionsRow rowAdmissionsRow = ((AdmissionsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1146,11 +1210,11 @@ namespace StAlbertHospitalAssessment {
                         Status,
                         null,
                         null};
-                if ((parentPatientsRowByPatientsAdmissions != null)) {
-                    columnValuesArray[4] = parentPatientsRowByPatientsAdmissions[0];
+                if ((parentPatientsRowByPatients_Admissions != null)) {
+                    columnValuesArray[4] = parentPatientsRowByPatients_Admissions[0];
                 }
-                if ((parentWardsRowByWardsAdmissions != null)) {
-                    columnValuesArray[5] = parentWardsRowByWardsAdmissions[0];
+                if ((parentWardsRowByWards_Admissions != null)) {
+                    columnValuesArray[5] = parentWardsRowByWards_Admissions[0];
                 }
                 rowAdmissionsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowAdmissionsRow);
@@ -1466,7 +1530,7 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AllocationRow AddAllocationRow(decimal JobFee, string Role, AdmissionsRow parentAdmissionsRowByAdmissionsAllocation, DoctorsRow parentDoctorsRowByDoctorsAllocation) {
+            public AllocationRow AddAllocationRow(decimal JobFee, string Role, AdmissionsRow parentAdmissionsRowByAdmissions_Allocation, DoctorsRow parentDoctorsRowByDoctors_Allocation) {
                 AllocationRow rowAllocationRow = ((AllocationRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1474,11 +1538,11 @@ namespace StAlbertHospitalAssessment {
                         Role,
                         null,
                         null};
-                if ((parentAdmissionsRowByAdmissionsAllocation != null)) {
-                    columnValuesArray[3] = parentAdmissionsRowByAdmissionsAllocation[0];
+                if ((parentAdmissionsRowByAdmissions_Allocation != null)) {
+                    columnValuesArray[3] = parentAdmissionsRowByAdmissions_Allocation[0];
                 }
-                if ((parentDoctorsRowByDoctorsAllocation != null)) {
-                    columnValuesArray[4] = parentDoctorsRowByDoctorsAllocation[0];
+                if ((parentDoctorsRowByDoctors_Allocation != null)) {
+                    columnValuesArray[4] = parentDoctorsRowByDoctors_Allocation[0];
                 }
                 rowAllocationRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowAllocationRow);
@@ -2831,15 +2895,15 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PaymentsRow AddPaymentsRow(decimal Amount, System.DateTime Date, AdmissionsRow parentAdmissionsRowByAdmissionsPayments) {
+            public PaymentsRow AddPaymentsRow(decimal Amount, System.DateTime Date, AdmissionsRow parentAdmissionsRowByAdmissions_Payments) {
                 PaymentsRow rowPaymentsRow = ((PaymentsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         Amount,
                         Date,
                         null};
-                if ((parentAdmissionsRowByAdmissionsPayments != null)) {
-                    columnValuesArray[3] = parentAdmissionsRowByAdmissionsPayments[0];
+                if ((parentAdmissionsRowByAdmissions_Payments != null)) {
+                    columnValuesArray[3] = parentAdmissionsRowByAdmissions_Payments[0];
                 }
                 rowPaymentsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPaymentsRow);
@@ -3137,18 +3201,18 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PrescriptionsRow AddPrescriptionsRow(MedicationRow parentMedicationRowByMedicationPrescriptions, System.DateTime PrescriptionDate, AdmissionsRow parentAdmissionsRowByAdmissionsPrescriptions) {
+            public PrescriptionsRow AddPrescriptionsRow(MedicationRow parentMedicationRowByMedication_Prescriptions, System.DateTime PrescriptionDate, AdmissionsRow parentAdmissionsRowByAdmissions_Prescriptions) {
                 PrescriptionsRow rowPrescriptionsRow = ((PrescriptionsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
                         PrescriptionDate,
                         null};
-                if ((parentMedicationRowByMedicationPrescriptions != null)) {
-                    columnValuesArray[1] = parentMedicationRowByMedicationPrescriptions[0];
+                if ((parentMedicationRowByMedication_Prescriptions != null)) {
+                    columnValuesArray[1] = parentMedicationRowByMedication_Prescriptions[0];
                 }
-                if ((parentAdmissionsRowByAdmissionsPrescriptions != null)) {
-                    columnValuesArray[3] = parentAdmissionsRowByAdmissionsPrescriptions[0];
+                if ((parentAdmissionsRowByAdmissions_Prescriptions != null)) {
+                    columnValuesArray[3] = parentAdmissionsRowByAdmissions_Prescriptions[0];
                 }
                 rowPrescriptionsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowPrescriptionsRow);
@@ -3466,7 +3530,7 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Research_ProjectRow AddResearch_ProjectRow(string Outcome, System.DateTime EndDate, decimal Budget, Research_TopicRow parentResearch_TopicRowByResearch_TopicResearch_Project, DoctorsRow parentDoctorsRowByDoctorsResearch_Project) {
+            public Research_ProjectRow AddResearch_ProjectRow(string Outcome, System.DateTime EndDate, decimal Budget, Research_TopicRow parentResearch_TopicRowByResearch_Topic_Research_Project, DoctorsRow parentDoctorsRowByDoctors_Research_Project) {
                 Research_ProjectRow rowResearch_ProjectRow = ((Research_ProjectRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -3475,11 +3539,11 @@ namespace StAlbertHospitalAssessment {
                         Budget,
                         null,
                         null};
-                if ((parentResearch_TopicRowByResearch_TopicResearch_Project != null)) {
-                    columnValuesArray[4] = parentResearch_TopicRowByResearch_TopicResearch_Project[0];
+                if ((parentResearch_TopicRowByResearch_Topic_Research_Project != null)) {
+                    columnValuesArray[4] = parentResearch_TopicRowByResearch_Topic_Research_Project[0];
                 }
-                if ((parentDoctorsRowByDoctorsResearch_Project != null)) {
-                    columnValuesArray[5] = parentDoctorsRowByDoctorsResearch_Project[0];
+                if ((parentDoctorsRowByDoctors_Research_Project != null)) {
+                    columnValuesArray[5] = parentDoctorsRowByDoctors_Research_Project[0];
                 }
                 rowResearch_ProjectRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowResearch_ProjectRow);
@@ -7584,23 +7648,23 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PatientsRow PatientsRow {
+            public WardsRow WardsRow {
                 get {
-                    return ((PatientsRow)(this.GetParentRow(this.Table.ParentRelations["PatientsAdmissions"])));
+                    return ((WardsRow)(this.GetParentRow(this.Table.ParentRelations["Wards_Admissions"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["PatientsAdmissions"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["Wards_Admissions"]);
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public WardsRow WardsRow {
+            public PatientsRow PatientsRow {
                 get {
-                    return ((WardsRow)(this.GetParentRow(this.Table.ParentRelations["WardsAdmissions"])));
+                    return ((PatientsRow)(this.GetParentRow(this.Table.ParentRelations["Patients_Admissions"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["WardsAdmissions"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["Patients_Admissions"]);
                 }
             }
             
@@ -7666,34 +7730,34 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AllocationRow[] GetAllocationRows() {
-                if ((this.Table.ChildRelations["AdmissionsAllocation"] == null)) {
-                    return new AllocationRow[0];
+            public PrescriptionsRow[] GetPrescriptionsRows() {
+                if ((this.Table.ChildRelations["Admissions_Prescriptions"] == null)) {
+                    return new PrescriptionsRow[0];
                 }
                 else {
-                    return ((AllocationRow[])(base.GetChildRows(this.Table.ChildRelations["AdmissionsAllocation"])));
+                    return ((PrescriptionsRow[])(base.GetChildRows(this.Table.ChildRelations["Admissions_Prescriptions"])));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public PaymentsRow[] GetPaymentsRows() {
-                if ((this.Table.ChildRelations["AdmissionsPayments"] == null)) {
+                if ((this.Table.ChildRelations["Admissions_Payments"] == null)) {
                     return new PaymentsRow[0];
                 }
                 else {
-                    return ((PaymentsRow[])(base.GetChildRows(this.Table.ChildRelations["AdmissionsPayments"])));
+                    return ((PaymentsRow[])(base.GetChildRows(this.Table.ChildRelations["Admissions_Payments"])));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PrescriptionsRow[] GetPrescriptionsRows() {
-                if ((this.Table.ChildRelations["AdmissionsPrescriptions"] == null)) {
-                    return new PrescriptionsRow[0];
+            public AllocationRow[] GetAllocationRows() {
+                if ((this.Table.ChildRelations["Admissions_Allocation"] == null)) {
+                    return new AllocationRow[0];
                 }
                 else {
-                    return ((PrescriptionsRow[])(base.GetChildRows(this.Table.ChildRelations["AdmissionsPrescriptions"])));
+                    return ((AllocationRow[])(base.GetChildRows(this.Table.ChildRelations["Admissions_Allocation"])));
                 }
             }
         }
@@ -7789,23 +7853,23 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AdmissionsRow AdmissionsRow {
+            public DoctorsRow DoctorsRow {
                 get {
-                    return ((AdmissionsRow)(this.GetParentRow(this.Table.ParentRelations["AdmissionsAllocation"])));
+                    return ((DoctorsRow)(this.GetParentRow(this.Table.ParentRelations["Doctors_Allocation"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["AdmissionsAllocation"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["Doctors_Allocation"]);
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public DoctorsRow DoctorsRow {
+            public AdmissionsRow AdmissionsRow {
                 get {
-                    return ((DoctorsRow)(this.GetParentRow(this.Table.ParentRelations["DoctorsAllocation"])));
+                    return ((AdmissionsRow)(this.GetParentRow(this.Table.ParentRelations["Admissions_Allocation"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["DoctorsAllocation"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["Admissions_Allocation"]);
                 }
             }
             
@@ -8109,23 +8173,23 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AllocationRow[] GetAllocationRows() {
-                if ((this.Table.ChildRelations["DoctorsAllocation"] == null)) {
-                    return new AllocationRow[0];
+            public Research_ProjectRow[] GetResearch_ProjectRows() {
+                if ((this.Table.ChildRelations["Doctors_Research Project"] == null)) {
+                    return new Research_ProjectRow[0];
                 }
                 else {
-                    return ((AllocationRow[])(base.GetChildRows(this.Table.ChildRelations["DoctorsAllocation"])));
+                    return ((Research_ProjectRow[])(base.GetChildRows(this.Table.ChildRelations["Doctors_Research Project"])));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Research_ProjectRow[] GetResearch_ProjectRows() {
-                if ((this.Table.ChildRelations["DoctorsResearch Project"] == null)) {
-                    return new Research_ProjectRow[0];
+            public AllocationRow[] GetAllocationRows() {
+                if ((this.Table.ChildRelations["Doctors_Allocation"] == null)) {
+                    return new AllocationRow[0];
                 }
                 else {
-                    return ((Research_ProjectRow[])(base.GetChildRows(this.Table.ChildRelations["DoctorsResearch Project"])));
+                    return ((AllocationRow[])(base.GetChildRows(this.Table.ChildRelations["Doctors_Allocation"])));
                 }
             }
         }
@@ -8214,11 +8278,11 @@ namespace StAlbertHospitalAssessment {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public PrescriptionsRow[] GetPrescriptionsRows() {
-                if ((this.Table.ChildRelations["MedicationPrescriptions"] == null)) {
+                if ((this.Table.ChildRelations["Medication_Prescriptions"] == null)) {
                     return new PrescriptionsRow[0];
                 }
                 else {
-                    return ((PrescriptionsRow[])(base.GetChildRows(this.Table.ChildRelations["MedicationPrescriptions"])));
+                    return ((PrescriptionsRow[])(base.GetChildRows(this.Table.ChildRelations["Medication_Prescriptions"])));
                 }
             }
         }
@@ -8475,11 +8539,11 @@ namespace StAlbertHospitalAssessment {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public AdmissionsRow[] GetAdmissionsRows() {
-                if ((this.Table.ChildRelations["PatientsAdmissions"] == null)) {
+                if ((this.Table.ChildRelations["Patients_Admissions"] == null)) {
                     return new AdmissionsRow[0];
                 }
                 else {
-                    return ((AdmissionsRow[])(base.GetChildRows(this.Table.ChildRelations["PatientsAdmissions"])));
+                    return ((AdmissionsRow[])(base.GetChildRows(this.Table.ChildRelations["Patients_Admissions"])));
                 }
             }
         }
@@ -8561,10 +8625,10 @@ namespace StAlbertHospitalAssessment {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public AdmissionsRow AdmissionsRow {
                 get {
-                    return ((AdmissionsRow)(this.GetParentRow(this.Table.ParentRelations["AdmissionsPayments"])));
+                    return ((AdmissionsRow)(this.GetParentRow(this.Table.ParentRelations["Admissions_Payments"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["AdmissionsPayments"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["Admissions_Payments"]);
                 }
             }
             
@@ -8680,23 +8744,23 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AdmissionsRow AdmissionsRow {
+            public MedicationRow MedicationRow {
                 get {
-                    return ((AdmissionsRow)(this.GetParentRow(this.Table.ParentRelations["AdmissionsPrescriptions"])));
+                    return ((MedicationRow)(this.GetParentRow(this.Table.ParentRelations["Medication_Prescriptions"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["AdmissionsPrescriptions"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["Medication_Prescriptions"]);
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public MedicationRow MedicationRow {
+            public AdmissionsRow AdmissionsRow {
                 get {
-                    return ((MedicationRow)(this.GetParentRow(this.Table.ParentRelations["MedicationPrescriptions"])));
+                    return ((AdmissionsRow)(this.GetParentRow(this.Table.ParentRelations["Admissions_Prescriptions"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["MedicationPrescriptions"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["Admissions_Prescriptions"]);
                 }
             }
             
@@ -8844,23 +8908,23 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public DoctorsRow DoctorsRow {
+            public Research_TopicRow Research_TopicRow {
                 get {
-                    return ((DoctorsRow)(this.GetParentRow(this.Table.ParentRelations["DoctorsResearch Project"])));
+                    return ((Research_TopicRow)(this.GetParentRow(this.Table.ParentRelations["Research Topic_Research Project"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["DoctorsResearch Project"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["Research Topic_Research Project"]);
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Research_TopicRow Research_TopicRow {
+            public DoctorsRow DoctorsRow {
                 get {
-                    return ((Research_TopicRow)(this.GetParentRow(this.Table.ParentRelations["Research TopicResearch Project"])));
+                    return ((DoctorsRow)(this.GetParentRow(this.Table.ParentRelations["Doctors_Research Project"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["Research TopicResearch Project"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["Doctors_Research Project"]);
                 }
             }
             
@@ -9009,11 +9073,11 @@ namespace StAlbertHospitalAssessment {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public Research_ProjectRow[] GetResearch_ProjectRows() {
-                if ((this.Table.ChildRelations["Research TopicResearch Project"] == null)) {
+                if ((this.Table.ChildRelations["Research Topic_Research Project"] == null)) {
                     return new Research_ProjectRow[0];
                 }
                 else {
-                    return ((Research_ProjectRow[])(base.GetChildRows(this.Table.ChildRelations["Research TopicResearch Project"])));
+                    return ((Research_ProjectRow[])(base.GetChildRows(this.Table.ChildRelations["Research Topic_Research Project"])));
                 }
             }
         }
@@ -9130,11 +9194,11 @@ namespace StAlbertHospitalAssessment {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public AdmissionsRow[] GetAdmissionsRows() {
-                if ((this.Table.ChildRelations["WardsAdmissions"] == null)) {
+                if ((this.Table.ChildRelations["Wards_Admissions"] == null)) {
                     return new AdmissionsRow[0];
                 }
                 else {
-                    return ((AdmissionsRow[])(base.GetChildRows(this.Table.ChildRelations["WardsAdmissions"])));
+                    return ((AdmissionsRow[])(base.GetChildRows(this.Table.ChildRelations["Wards_Admissions"])));
                 }
             }
         }

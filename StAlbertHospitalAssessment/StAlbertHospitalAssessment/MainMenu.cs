@@ -45,5 +45,14 @@ namespace StAlbertHospitalAssessment
             }
             frmAddAdmission.ShowDialog();
         }
+
+        private void btnUpdateAdmission_Click(object sender, EventArgs e)
+        {
+            if (frmUpdateAdmission == null)
+            {
+                frmUpdateAdmission = new Update_Admission(DC, this);
+            }
+            frmUpdateAdmission.ShowDialog();
+        }
     }
 }

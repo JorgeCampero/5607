@@ -102,6 +102,9 @@
     <Compile Include="Remove Research Project.Designer.cs">
       <DependentUpon>Remove Research Project.cs</DependentUpon>
     </Compile>
+    <Compile Include="StAlbertDataSet.cs">
+      <DependentUpon>StAlbertDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="StAlbertDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

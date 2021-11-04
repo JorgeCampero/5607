@@ -31,6 +31,7 @@ namespace StAlbertHospitalAssessment
         {
             this.btnAddAdmission = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.btnUpdateAdmission = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAddAdmission
@@ -53,11 +54,22 @@ namespace StAlbertHospitalAssessment
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // btnUpdateAdmission
+            // 
+            this.btnUpdateAdmission.Location = new System.Drawing.Point(34, 112);
+            this.btnUpdateAdmission.Name = "btnUpdateAdmission";
+            this.btnUpdateAdmission.Size = new System.Drawing.Size(159, 71);
+            this.btnUpdateAdmission.TabIndex = 2;
+            this.btnUpdateAdmission.Text = "Update Admission";
+            this.btnUpdateAdmission.UseVisualStyleBackColor = true;
+            this.btnUpdateAdmission.Click += new System.EventHandler(this.btnUpdateAdmission_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 565);
+            this.Controls.Add(this.btnUpdateAdmission);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnAddAdmission);
             this.Name = "MainMenu";
@@ -71,6 +83,7 @@ namespace StAlbertHospitalAssessment
 
         private System.Windows.Forms.Button btnAddAdmission;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnUpdateAdmission;
     }
 }
 
