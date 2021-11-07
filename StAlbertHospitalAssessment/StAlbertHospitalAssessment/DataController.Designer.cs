@@ -31,11 +31,11 @@ namespace StAlbertHospitalAssessment
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataController));
             this.oleDbSelectCommand1 = new System.Data.OleDb.OleDbCommand();
+            this.ctnStAlbert = new System.Data.OleDb.OleDbConnection();
             this.oleDbInsertCommand1 = new System.Data.OleDb.OleDbCommand();
             this.oleDbUpdateCommand1 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDeleteCommand1 = new System.Data.OleDb.OleDbCommand();
             this.DaAdmission = new System.Data.OleDb.OleDbDataAdapter();
-            this.ctnStAlbert = new System.Data.OleDb.OleDbConnection();
             this.oleDbSelectCommand2 = new System.Data.OleDb.OleDbCommand();
             this.oleDbInsertCommand2 = new System.Data.OleDb.OleDbCommand();
             this.oleDbUpdateCommand2 = new System.Data.OleDb.OleDbCommand();
@@ -61,11 +61,6 @@ namespace StAlbertHospitalAssessment
             this.oleDbUpdateCommand6 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDeleteCommand6 = new System.Data.OleDb.OleDbCommand();
             this.DaPayment = new System.Data.OleDb.OleDbDataAdapter();
-            this.oleDbSelectCommand7 = new System.Data.OleDb.OleDbCommand();
-            this.oleDbInsertCommand7 = new System.Data.OleDb.OleDbCommand();
-            this.oleDbUpdateCommand7 = new System.Data.OleDb.OleDbCommand();
-            this.oleDbDeleteCommand7 = new System.Data.OleDb.OleDbCommand();
-            this.DaPrescription = new System.Data.OleDb.OleDbDataAdapter();
             this.oleDbSelectCommand8 = new System.Data.OleDb.OleDbCommand();
             this.oleDbInsertCommand8 = new System.Data.OleDb.OleDbCommand();
             this.oleDbUpdateCommand8 = new System.Data.OleDb.OleDbCommand();
@@ -81,6 +76,11 @@ namespace StAlbertHospitalAssessment
             this.oleDbUpdateCommand10 = new System.Data.OleDb.OleDbCommand();
             this.oleDbDeleteCommand10 = new System.Data.OleDb.OleDbCommand();
             this.DaWard = new System.Data.OleDb.OleDbDataAdapter();
+            this.oleDbSelectCommand7 = new System.Data.OleDb.OleDbCommand();
+            this.oleDbInsertCommand7 = new System.Data.OleDb.OleDbCommand();
+            this.oleDbUpdateCommand7 = new System.Data.OleDb.OleDbCommand();
+            this.oleDbDeleteCommand7 = new System.Data.OleDb.OleDbCommand();
+            this.DaPrescription = new System.Data.OleDb.OleDbDataAdapter();
             this.dsStAlbert = new StAlbertHospitalAssessment.StAlbertDataSet();
             ((System.ComponentModel.ISupportInitialize)(this.dsStAlbert)).BeginInit();
             this.SuspendLayout();
@@ -90,6 +90,10 @@ namespace StAlbertHospitalAssessment
             this.oleDbSelectCommand1.CommandText = "SELECT AdmissionID, Description, AdmissionDate, Status, PatientID, WardID\r\nFROM  " +
     "   Admissions\r\nORDER BY AdmissionID, PatientID, WardID";
             this.oleDbSelectCommand1.Connection = this.ctnStAlbert;
+            // 
+            // ctnStAlbert
+            // 
+            this.ctnStAlbert.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\5607\\StAlbert.accdb";
             // 
             // oleDbInsertCommand1
             // 
@@ -156,10 +160,6 @@ namespace StAlbertHospitalAssessment
                         new System.Data.Common.DataColumnMapping("PatientID", "PatientID"),
                         new System.Data.Common.DataColumnMapping("WardID", "WardID")})});
             this.DaAdmission.UpdateCommand = this.oleDbUpdateCommand1;
-            // 
-            // ctnStAlbert
-            // 
-            this.ctnStAlbert.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\5607\\StAlbert.accdb";
             // 
             // oleDbSelectCommand2
             // 
@@ -522,64 +522,6 @@ namespace StAlbertHospitalAssessment
                         new System.Data.Common.DataColumnMapping("AdmissionID", "AdmissionID")})});
             this.DaPayment.UpdateCommand = this.oleDbUpdateCommand6;
             // 
-            // oleDbSelectCommand7
-            // 
-            this.oleDbSelectCommand7.CommandText = "SELECT PrescriptionID, MedicationName, PrescriptionDate, AdmissionID\r\nFROM     Pr" +
-    "escriptions\r\nORDER BY PrescriptionID, AdmissionID";
-            this.oleDbSelectCommand7.Connection = this.ctnStAlbert;
-            // 
-            // oleDbInsertCommand7
-            // 
-            this.oleDbInsertCommand7.CommandText = "INSERT INTO `Prescriptions` (`MedicationName`, `PrescriptionDate`, `AdmissionID`)" +
-    " VALUES (?, ?, ?)";
-            this.oleDbInsertCommand7.Connection = this.ctnStAlbert;
-            this.oleDbInsertCommand7.Parameters.AddRange(new System.Data.OleDb.OleDbParameter[] {
-            new System.Data.OleDb.OleDbParameter("MedicationName", System.Data.OleDb.OleDbType.Integer, 0, "MedicationName"),
-            new System.Data.OleDb.OleDbParameter("PrescriptionDate", System.Data.OleDb.OleDbType.Date, 0, "PrescriptionDate"),
-            new System.Data.OleDb.OleDbParameter("AdmissionID", System.Data.OleDb.OleDbType.Integer, 0, "AdmissionID")});
-            // 
-            // oleDbUpdateCommand7
-            // 
-            this.oleDbUpdateCommand7.CommandText = resources.GetString("oleDbUpdateCommand7.CommandText");
-            this.oleDbUpdateCommand7.Connection = this.ctnStAlbert;
-            this.oleDbUpdateCommand7.Parameters.AddRange(new System.Data.OleDb.OleDbParameter[] {
-            new System.Data.OleDb.OleDbParameter("MedicationName", System.Data.OleDb.OleDbType.Integer, 0, "MedicationName"),
-            new System.Data.OleDb.OleDbParameter("PrescriptionDate", System.Data.OleDb.OleDbType.Date, 0, "PrescriptionDate"),
-            new System.Data.OleDb.OleDbParameter("AdmissionID", System.Data.OleDb.OleDbType.Integer, 0, "AdmissionID"),
-            new System.Data.OleDb.OleDbParameter("Original_PrescriptionID", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "PrescriptionID", System.Data.DataRowVersion.Original, null),
-            new System.Data.OleDb.OleDbParameter("IsNull_MedicationName", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MedicationName", System.Data.DataRowVersion.Original, true, null),
-            new System.Data.OleDb.OleDbParameter("Original_MedicationName", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "MedicationName", System.Data.DataRowVersion.Original, null),
-            new System.Data.OleDb.OleDbParameter("IsNull_PrescriptionDate", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "PrescriptionDate", System.Data.DataRowVersion.Original, true, null),
-            new System.Data.OleDb.OleDbParameter("Original_PrescriptionDate", System.Data.OleDb.OleDbType.Date, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "PrescriptionDate", System.Data.DataRowVersion.Original, null),
-            new System.Data.OleDb.OleDbParameter("IsNull_AdmissionID", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AdmissionID", System.Data.DataRowVersion.Original, true, null),
-            new System.Data.OleDb.OleDbParameter("Original_AdmissionID", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "AdmissionID", System.Data.DataRowVersion.Original, null)});
-            // 
-            // oleDbDeleteCommand7
-            // 
-            this.oleDbDeleteCommand7.CommandText = resources.GetString("oleDbDeleteCommand7.CommandText");
-            this.oleDbDeleteCommand7.Connection = this.ctnStAlbert;
-            this.oleDbDeleteCommand7.Parameters.AddRange(new System.Data.OleDb.OleDbParameter[] {
-            new System.Data.OleDb.OleDbParameter("Original_PrescriptionID", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "PrescriptionID", System.Data.DataRowVersion.Original, null),
-            new System.Data.OleDb.OleDbParameter("IsNull_MedicationName", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MedicationName", System.Data.DataRowVersion.Original, true, null),
-            new System.Data.OleDb.OleDbParameter("Original_MedicationName", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "MedicationName", System.Data.DataRowVersion.Original, null),
-            new System.Data.OleDb.OleDbParameter("IsNull_PrescriptionDate", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "PrescriptionDate", System.Data.DataRowVersion.Original, true, null),
-            new System.Data.OleDb.OleDbParameter("Original_PrescriptionDate", System.Data.OleDb.OleDbType.Date, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "PrescriptionDate", System.Data.DataRowVersion.Original, null),
-            new System.Data.OleDb.OleDbParameter("IsNull_AdmissionID", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AdmissionID", System.Data.DataRowVersion.Original, true, null),
-            new System.Data.OleDb.OleDbParameter("Original_AdmissionID", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "AdmissionID", System.Data.DataRowVersion.Original, null)});
-            // 
-            // DaPrescription
-            // 
-            this.DaPrescription.DeleteCommand = this.oleDbDeleteCommand7;
-            this.DaPrescription.InsertCommand = this.oleDbInsertCommand7;
-            this.DaPrescription.SelectCommand = this.oleDbSelectCommand7;
-            this.DaPrescription.TableMappings.AddRange(new System.Data.Common.DataTableMapping[] {
-            new System.Data.Common.DataTableMapping("Table", "Prescriptions", new System.Data.Common.DataColumnMapping[] {
-                        new System.Data.Common.DataColumnMapping("PrescriptionID", "PrescriptionID"),
-                        new System.Data.Common.DataColumnMapping("MedicationName", "MedicationName"),
-                        new System.Data.Common.DataColumnMapping("PrescriptionDate", "PrescriptionDate"),
-                        new System.Data.Common.DataColumnMapping("AdmissionID", "AdmissionID")})});
-            this.DaPrescription.UpdateCommand = this.oleDbUpdateCommand7;
-            // 
             // oleDbSelectCommand8
             // 
             this.oleDbSelectCommand8.CommandText = "SELECT ResearchProjectID, Outcome, EndDate, Budget, ResearchTopicID, DoctorID\r\nFR" +
@@ -761,9 +703,74 @@ namespace StAlbertHospitalAssessment
                         new System.Data.Common.DataColumnMapping("Capacity", "Capacity")})});
             this.DaWard.UpdateCommand = this.oleDbUpdateCommand10;
             // 
+            // oleDbSelectCommand7
+            // 
+            this.oleDbSelectCommand7.CommandText = "SELECT PrescriptionID, MedicationName, PrescriptionDate, AdmissionID, Amount\r\nFRO" +
+    "M     Prescriptions\r\nORDER BY PrescriptionID, AdmissionID, MedicationName";
+            this.oleDbSelectCommand7.Connection = this.ctnStAlbert;
+            // 
+            // oleDbInsertCommand7
+            // 
+            this.oleDbInsertCommand7.CommandText = "INSERT INTO `Prescriptions` (`MedicationName`, `PrescriptionDate`, `AdmissionID`," +
+    " `Amount`) VALUES (?, ?, ?, ?)";
+            this.oleDbInsertCommand7.Connection = this.ctnStAlbert;
+            this.oleDbInsertCommand7.Parameters.AddRange(new System.Data.OleDb.OleDbParameter[] {
+            new System.Data.OleDb.OleDbParameter("MedicationName", System.Data.OleDb.OleDbType.Integer, 0, "MedicationName"),
+            new System.Data.OleDb.OleDbParameter("PrescriptionDate", System.Data.OleDb.OleDbType.Date, 0, "PrescriptionDate"),
+            new System.Data.OleDb.OleDbParameter("AdmissionID", System.Data.OleDb.OleDbType.Integer, 0, "AdmissionID"),
+            new System.Data.OleDb.OleDbParameter("Amount", System.Data.OleDb.OleDbType.Integer, 0, "Amount")});
+            // 
+            // oleDbUpdateCommand7
+            // 
+            this.oleDbUpdateCommand7.CommandText = resources.GetString("oleDbUpdateCommand7.CommandText");
+            this.oleDbUpdateCommand7.Connection = this.ctnStAlbert;
+            this.oleDbUpdateCommand7.Parameters.AddRange(new System.Data.OleDb.OleDbParameter[] {
+            new System.Data.OleDb.OleDbParameter("MedicationName", System.Data.OleDb.OleDbType.Integer, 0, "MedicationName"),
+            new System.Data.OleDb.OleDbParameter("PrescriptionDate", System.Data.OleDb.OleDbType.Date, 0, "PrescriptionDate"),
+            new System.Data.OleDb.OleDbParameter("AdmissionID", System.Data.OleDb.OleDbType.Integer, 0, "AdmissionID"),
+            new System.Data.OleDb.OleDbParameter("Amount", System.Data.OleDb.OleDbType.Integer, 0, "Amount"),
+            new System.Data.OleDb.OleDbParameter("Original_PrescriptionID", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "PrescriptionID", System.Data.DataRowVersion.Original, null),
+            new System.Data.OleDb.OleDbParameter("IsNull_MedicationName", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MedicationName", System.Data.DataRowVersion.Original, true, null),
+            new System.Data.OleDb.OleDbParameter("Original_MedicationName", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "MedicationName", System.Data.DataRowVersion.Original, null),
+            new System.Data.OleDb.OleDbParameter("IsNull_PrescriptionDate", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "PrescriptionDate", System.Data.DataRowVersion.Original, true, null),
+            new System.Data.OleDb.OleDbParameter("Original_PrescriptionDate", System.Data.OleDb.OleDbType.Date, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "PrescriptionDate", System.Data.DataRowVersion.Original, null),
+            new System.Data.OleDb.OleDbParameter("IsNull_AdmissionID", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AdmissionID", System.Data.DataRowVersion.Original, true, null),
+            new System.Data.OleDb.OleDbParameter("Original_AdmissionID", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "AdmissionID", System.Data.DataRowVersion.Original, null),
+            new System.Data.OleDb.OleDbParameter("IsNull_Amount", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Amount", System.Data.DataRowVersion.Original, true, null),
+            new System.Data.OleDb.OleDbParameter("Original_Amount", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "Amount", System.Data.DataRowVersion.Original, null)});
+            // 
+            // oleDbDeleteCommand7
+            // 
+            this.oleDbDeleteCommand7.CommandText = resources.GetString("oleDbDeleteCommand7.CommandText");
+            this.oleDbDeleteCommand7.Connection = this.ctnStAlbert;
+            this.oleDbDeleteCommand7.Parameters.AddRange(new System.Data.OleDb.OleDbParameter[] {
+            new System.Data.OleDb.OleDbParameter("Original_PrescriptionID", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "PrescriptionID", System.Data.DataRowVersion.Original, null),
+            new System.Data.OleDb.OleDbParameter("IsNull_MedicationName", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MedicationName", System.Data.DataRowVersion.Original, true, null),
+            new System.Data.OleDb.OleDbParameter("Original_MedicationName", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "MedicationName", System.Data.DataRowVersion.Original, null),
+            new System.Data.OleDb.OleDbParameter("IsNull_PrescriptionDate", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "PrescriptionDate", System.Data.DataRowVersion.Original, true, null),
+            new System.Data.OleDb.OleDbParameter("Original_PrescriptionDate", System.Data.OleDb.OleDbType.Date, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "PrescriptionDate", System.Data.DataRowVersion.Original, null),
+            new System.Data.OleDb.OleDbParameter("IsNull_AdmissionID", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AdmissionID", System.Data.DataRowVersion.Original, true, null),
+            new System.Data.OleDb.OleDbParameter("Original_AdmissionID", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "AdmissionID", System.Data.DataRowVersion.Original, null),
+            new System.Data.OleDb.OleDbParameter("IsNull_Amount", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "Amount", System.Data.DataRowVersion.Original, true, null),
+            new System.Data.OleDb.OleDbParameter("Original_Amount", System.Data.OleDb.OleDbType.Integer, 0, System.Data.ParameterDirection.Input, false, ((byte)(0)), ((byte)(0)), "Amount", System.Data.DataRowVersion.Original, null)});
+            // 
+            // DaPrescription
+            // 
+            this.DaPrescription.DeleteCommand = this.oleDbDeleteCommand7;
+            this.DaPrescription.InsertCommand = this.oleDbInsertCommand7;
+            this.DaPrescription.SelectCommand = this.oleDbSelectCommand7;
+            this.DaPrescription.TableMappings.AddRange(new System.Data.Common.DataTableMapping[] {
+            new System.Data.Common.DataTableMapping("Table", "Prescriptions", new System.Data.Common.DataColumnMapping[] {
+                        new System.Data.Common.DataColumnMapping("PrescriptionID", "PrescriptionID"),
+                        new System.Data.Common.DataColumnMapping("MedicationName", "MedicationName"),
+                        new System.Data.Common.DataColumnMapping("PrescriptionDate", "PrescriptionDate"),
+                        new System.Data.Common.DataColumnMapping("AdmissionID", "AdmissionID"),
+                        new System.Data.Common.DataColumnMapping("Amount", "Amount")})});
+            this.DaPrescription.UpdateCommand = this.oleDbUpdateCommand7;
+            // 
             // dsStAlbert
             // 
-            this.dsStAlbert.DataSetName = "dsStAlbert";
+            this.dsStAlbert.DataSetName = "StAlbertDataSet";
             this.dsStAlbert.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // DataController
@@ -811,11 +818,6 @@ namespace StAlbertHospitalAssessment
         private System.Data.OleDb.OleDbCommand oleDbUpdateCommand6;
         private System.Data.OleDb.OleDbCommand oleDbDeleteCommand6;
         private System.Data.OleDb.OleDbDataAdapter DaPayment;
-        private System.Data.OleDb.OleDbCommand oleDbSelectCommand7;
-        private System.Data.OleDb.OleDbCommand oleDbInsertCommand7;
-        private System.Data.OleDb.OleDbCommand oleDbUpdateCommand7;
-        private System.Data.OleDb.OleDbCommand oleDbDeleteCommand7;
-        private System.Data.OleDb.OleDbDataAdapter DaPrescription;
         private System.Data.OleDb.OleDbCommand oleDbSelectCommand8;
         private System.Data.OleDb.OleDbCommand oleDbInsertCommand8;
         private System.Data.OleDb.OleDbCommand oleDbUpdateCommand8;
@@ -831,6 +833,11 @@ namespace StAlbertHospitalAssessment
         private System.Data.OleDb.OleDbCommand oleDbUpdateCommand10;
         private System.Data.OleDb.OleDbCommand oleDbDeleteCommand10;
         private System.Data.OleDb.OleDbDataAdapter DaWard;
-        public StAlbertDataSet dsStAlbert;
+        private System.Data.OleDb.OleDbCommand oleDbSelectCommand7;
+        private System.Data.OleDb.OleDbCommand oleDbInsertCommand7;
+        private System.Data.OleDb.OleDbCommand oleDbUpdateCommand7;
+        private System.Data.OleDb.OleDbCommand oleDbDeleteCommand7;
+        private System.Data.OleDb.OleDbDataAdapter DaPrescription;
+        private StAlbertDataSet dsStAlbert;
     }
 }

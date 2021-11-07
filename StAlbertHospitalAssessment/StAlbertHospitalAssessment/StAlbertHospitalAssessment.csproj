@@ -119,8 +119,14 @@
     <EmbeddedResource Include="Add Admission.resx">
       <DependentUpon>Add Admission.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Add Research Project.resx">
+      <DependentUpon>Add Research Project.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataController.resx">
       <DependentUpon>DataController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Delete Admission.resx">
+      <DependentUpon>Delete Admission.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
@@ -134,6 +140,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Remove Prescription.resx">
+      <DependentUpon>Remove Prescription.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Update Admission.resx">
       <DependentUpon>Update Admission.cs</DependentUpon>
     </EmbeddedResource>

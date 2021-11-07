@@ -32,6 +32,9 @@ namespace StAlbertHospitalAssessment
             this.btnAddAdmission = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnUpdateAdmission = new System.Windows.Forms.Button();
+            this.btnDeleteAdmission = new System.Windows.Forms.Button();
+            this.btnAddResearchProject = new System.Windows.Forms.Button();
+            this.btnRemovePrescription = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAddAdmission
@@ -64,11 +67,44 @@ namespace StAlbertHospitalAssessment
             this.btnUpdateAdmission.UseVisualStyleBackColor = true;
             this.btnUpdateAdmission.Click += new System.EventHandler(this.btnUpdateAdmission_Click);
             // 
+            // btnDeleteAdmission
+            // 
+            this.btnDeleteAdmission.Location = new System.Drawing.Point(34, 233);
+            this.btnDeleteAdmission.Name = "btnDeleteAdmission";
+            this.btnDeleteAdmission.Size = new System.Drawing.Size(159, 71);
+            this.btnDeleteAdmission.TabIndex = 3;
+            this.btnDeleteAdmission.Text = "Delete Admission";
+            this.btnDeleteAdmission.UseVisualStyleBackColor = true;
+            this.btnDeleteAdmission.Click += new System.EventHandler(this.btnDeleteAdmission_Click);
+            // 
+            // btnAddResearchProject
+            // 
+            this.btnAddResearchProject.Location = new System.Drawing.Point(34, 340);
+            this.btnAddResearchProject.Name = "btnAddResearchProject";
+            this.btnAddResearchProject.Size = new System.Drawing.Size(159, 71);
+            this.btnAddResearchProject.TabIndex = 4;
+            this.btnAddResearchProject.Text = "Add Research Project";
+            this.btnAddResearchProject.UseVisualStyleBackColor = true;
+            this.btnAddResearchProject.Click += new System.EventHandler(this.btnAddResearchProject_Click);
+            // 
+            // btnRemovePrescription
+            // 
+            this.btnRemovePrescription.Location = new System.Drawing.Point(34, 452);
+            this.btnRemovePrescription.Name = "btnRemovePrescription";
+            this.btnRemovePrescription.Size = new System.Drawing.Size(159, 71);
+            this.btnRemovePrescription.TabIndex = 5;
+            this.btnRemovePrescription.Text = "Remove Prescription";
+            this.btnRemovePrescription.UseVisualStyleBackColor = true;
+            this.btnRemovePrescription.Click += new System.EventHandler(this.btnRemovePrescription_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 565);
+            this.Controls.Add(this.btnRemovePrescription);
+            this.Controls.Add(this.btnAddResearchProject);
+            this.Controls.Add(this.btnDeleteAdmission);
             this.Controls.Add(this.btnUpdateAdmission);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnAddAdmission);
@@ -84,6 +120,9 @@ namespace StAlbertHospitalAssessment
         private System.Windows.Forms.Button btnAddAdmission;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnUpdateAdmission;
+        private System.Windows.Forms.Button btnDeleteAdmission;
+        private System.Windows.Forms.Button btnAddResearchProject;
+        private System.Windows.Forms.Button btnRemovePrescription;
     }
 }
 

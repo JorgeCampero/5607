@@ -54,5 +54,32 @@ namespace StAlbertHospitalAssessment
             }
             frmUpdateAdmission.ShowDialog();
         }
+
+        private void btnDeleteAdmission_Click(object sender, EventArgs e)
+        {
+            if (frmDeleteAdmission == null)
+            {
+                frmDeleteAdmission = new Delete_Admission(DC, this);
+            }
+            frmDeleteAdmission.ShowDialog();
+        }
+
+        private void btnAddResearchProject_Click(object sender, EventArgs e)
+        {
+            if (frmAddResearch == null)
+            {
+                frmAddResearch = new Add_Research_Project(DC, this);
+            }
+            frmAddResearch.ShowDialog();
+        }
+
+        private void btnRemovePrescription_Click(object sender, EventArgs e)
+        {
+            if (frmRemovePrescription == null)
+            {
+                frmRemovePrescription = new Remove_Prescription(DC, this);
+            }
+            frmRemovePrescription.ShowDialog();
+        }
     }
 }

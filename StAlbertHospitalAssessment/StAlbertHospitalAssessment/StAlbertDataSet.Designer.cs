@@ -36,8 +36,6 @@ namespace StAlbertHospitalAssessment {
         
         private PaymentsDataTable tablePayments;
         
-        private PrescriptionsDataTable tablePrescriptions;
-        
         private Research_ProjectDataTable tableResearch_Project;
         
         private Research_TopicDataTable tableResearch_Topic;
@@ -64,23 +62,19 @@ namespace StAlbertHospitalAssessment {
         
         private Wards1DataTable tableWards1;
         
-        private global::System.Data.DataRelation relationWards_Admissions;
-        
         private global::System.Data.DataRelation relationPatients_Admissions;
         
-        private global::System.Data.DataRelation relationDoctors_Allocation;
+        private global::System.Data.DataRelation relationWards_Admissions;
         
         private global::System.Data.DataRelation relationAdmissions_Allocation;
         
+        private global::System.Data.DataRelation relationDoctors_Allocation;
+        
         private global::System.Data.DataRelation relationAdmissions_Payments;
         
-        private global::System.Data.DataRelation relationMedication_Prescriptions;
-        
-        private global::System.Data.DataRelation relationAdmissions_Prescriptions;
+        private global::System.Data.DataRelation relationDoctors_Research_Project;
         
         private global::System.Data.DataRelation relationResearch_Topic_Research_Project;
-        
-        private global::System.Data.DataRelation relationDoctors_Research_Project;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -127,9 +121,6 @@ namespace StAlbertHospitalAssessment {
                 }
                 if ((ds.Tables["Payments"] != null)) {
                     base.Tables.Add(new PaymentsDataTable(ds.Tables["Payments"]));
-                }
-                if ((ds.Tables["Prescriptions"] != null)) {
-                    base.Tables.Add(new PrescriptionsDataTable(ds.Tables["Prescriptions"]));
                 }
                 if ((ds.Tables["Research Project"] != null)) {
                     base.Tables.Add(new Research_ProjectDataTable(ds.Tables["Research Project"]));
@@ -245,16 +236,6 @@ namespace StAlbertHospitalAssessment {
         public PaymentsDataTable Payments {
             get {
                 return this.tablePayments;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Browsable(false)]
-        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public PrescriptionsDataTable Prescriptions {
-            get {
-                return this.tablePrescriptions;
             }
         }
         
@@ -473,9 +454,6 @@ namespace StAlbertHospitalAssessment {
                 if ((ds.Tables["Payments"] != null)) {
                     base.Tables.Add(new PaymentsDataTable(ds.Tables["Payments"]));
                 }
-                if ((ds.Tables["Prescriptions"] != null)) {
-                    base.Tables.Add(new PrescriptionsDataTable(ds.Tables["Prescriptions"]));
-                }
                 if ((ds.Tables["Research Project"] != null)) {
                     base.Tables.Add(new Research_ProjectDataTable(ds.Tables["Research Project"]));
                 }
@@ -584,12 +562,6 @@ namespace StAlbertHospitalAssessment {
                     this.tablePayments.InitVars();
                 }
             }
-            this.tablePrescriptions = ((PrescriptionsDataTable)(base.Tables["Prescriptions"]));
-            if ((initTable == true)) {
-                if ((this.tablePrescriptions != null)) {
-                    this.tablePrescriptions.InitVars();
-                }
-            }
             this.tableResearch_Project = ((Research_ProjectDataTable)(base.Tables["Research Project"]));
             if ((initTable == true)) {
                 if ((this.tableResearch_Project != null)) {
@@ -668,15 +640,13 @@ namespace StAlbertHospitalAssessment {
                     this.tableWards1.InitVars();
                 }
             }
-            this.relationWards_Admissions = this.Relations["Wards_Admissions"];
             this.relationPatients_Admissions = this.Relations["Patients_Admissions"];
-            this.relationDoctors_Allocation = this.Relations["Doctors_Allocation"];
+            this.relationWards_Admissions = this.Relations["Wards_Admissions"];
             this.relationAdmissions_Allocation = this.Relations["Admissions_Allocation"];
+            this.relationDoctors_Allocation = this.Relations["Doctors_Allocation"];
             this.relationAdmissions_Payments = this.Relations["Admissions_Payments"];
-            this.relationMedication_Prescriptions = this.Relations["Medication_Prescriptions"];
-            this.relationAdmissions_Prescriptions = this.Relations["Admissions_Prescriptions"];
-            this.relationResearch_Topic_Research_Project = this.Relations["Research Topic_Research Project"];
             this.relationDoctors_Research_Project = this.Relations["Doctors_Research Project"];
+            this.relationResearch_Topic_Research_Project = this.Relations["Research Topic_Research Project"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -699,8 +669,6 @@ namespace StAlbertHospitalAssessment {
             base.Tables.Add(this.tablePatients);
             this.tablePayments = new PaymentsDataTable();
             base.Tables.Add(this.tablePayments);
-            this.tablePrescriptions = new PrescriptionsDataTable();
-            base.Tables.Add(this.tablePrescriptions);
             this.tableResearch_Project = new Research_ProjectDataTable();
             base.Tables.Add(this.tableResearch_Project);
             this.tableResearch_Topic = new Research_TopicDataTable();
@@ -728,13 +696,6 @@ namespace StAlbertHospitalAssessment {
             this.tableWards1 = new Wards1DataTable();
             base.Tables.Add(this.tableWards1);
             global::System.Data.ForeignKeyConstraint fkc;
-            fkc = new global::System.Data.ForeignKeyConstraint("Wards_Admissions", new global::System.Data.DataColumn[] {
-                        this.tableWards.WardIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableAdmissions.WardIDColumn});
-            this.tableAdmissions.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.None;
-            fkc.UpdateRule = global::System.Data.Rule.None;
             fkc = new global::System.Data.ForeignKeyConstraint("Patients_Admissions", new global::System.Data.DataColumn[] {
                         this.tablePatients.PatientIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableAdmissions.PatientIDColumn});
@@ -742,16 +703,23 @@ namespace StAlbertHospitalAssessment {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.None;
             fkc.UpdateRule = global::System.Data.Rule.None;
-            fkc = new global::System.Data.ForeignKeyConstraint("Doctors_Allocation", new global::System.Data.DataColumn[] {
-                        this.tableDoctors.DoctorIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableAllocation.DoctorIDColumn});
-            this.tableAllocation.Constraints.Add(fkc);
+            fkc = new global::System.Data.ForeignKeyConstraint("Wards_Admissions", new global::System.Data.DataColumn[] {
+                        this.tableWards.WardIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAdmissions.WardIDColumn});
+            this.tableAdmissions.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.None;
             fkc.UpdateRule = global::System.Data.Rule.None;
             fkc = new global::System.Data.ForeignKeyConstraint("Admissions_Allocation", new global::System.Data.DataColumn[] {
                         this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableAllocation.AdmissionIDColumn});
+            this.tableAllocation.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.None;
+            fkc.UpdateRule = global::System.Data.Rule.None;
+            fkc = new global::System.Data.ForeignKeyConstraint("Doctors_Allocation", new global::System.Data.DataColumn[] {
+                        this.tableDoctors.DoctorIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAllocation.DoctorIDColumn});
             this.tableAllocation.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.None;
@@ -763,17 +731,10 @@ namespace StAlbertHospitalAssessment {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.None;
             fkc.UpdateRule = global::System.Data.Rule.None;
-            fkc = new global::System.Data.ForeignKeyConstraint("Medication_Prescriptions", new global::System.Data.DataColumn[] {
-                        this.tableMedication.MedicationIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePrescriptions.MedicationNameColumn});
-            this.tablePrescriptions.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.None;
-            fkc.UpdateRule = global::System.Data.Rule.None;
-            fkc = new global::System.Data.ForeignKeyConstraint("Admissions_Prescriptions", new global::System.Data.DataColumn[] {
-                        this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePrescriptions.AdmissionIDColumn});
-            this.tablePrescriptions.Constraints.Add(fkc);
+            fkc = new global::System.Data.ForeignKeyConstraint("Doctors_Research Project", new global::System.Data.DataColumn[] {
+                        this.tableDoctors.DoctorIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableResearch_Project.DoctorIDColumn});
+            this.tableResearch_Project.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.None;
             fkc.UpdateRule = global::System.Data.Rule.None;
@@ -784,49 +745,34 @@ namespace StAlbertHospitalAssessment {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.None;
             fkc.UpdateRule = global::System.Data.Rule.None;
-            fkc = new global::System.Data.ForeignKeyConstraint("Doctors_Research Project", new global::System.Data.DataColumn[] {
-                        this.tableDoctors.DoctorIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableResearch_Project.DoctorIDColumn});
-            this.tableResearch_Project.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.None;
-            fkc.UpdateRule = global::System.Data.Rule.None;
-            this.relationWards_Admissions = new global::System.Data.DataRelation("Wards_Admissions", new global::System.Data.DataColumn[] {
-                        this.tableWards.WardIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableAdmissions.WardIDColumn}, false);
-            this.Relations.Add(this.relationWards_Admissions);
             this.relationPatients_Admissions = new global::System.Data.DataRelation("Patients_Admissions", new global::System.Data.DataColumn[] {
                         this.tablePatients.PatientIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableAdmissions.PatientIDColumn}, false);
             this.Relations.Add(this.relationPatients_Admissions);
-            this.relationDoctors_Allocation = new global::System.Data.DataRelation("Doctors_Allocation", new global::System.Data.DataColumn[] {
-                        this.tableDoctors.DoctorIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableAllocation.DoctorIDColumn}, false);
-            this.Relations.Add(this.relationDoctors_Allocation);
+            this.relationWards_Admissions = new global::System.Data.DataRelation("Wards_Admissions", new global::System.Data.DataColumn[] {
+                        this.tableWards.WardIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAdmissions.WardIDColumn}, false);
+            this.Relations.Add(this.relationWards_Admissions);
             this.relationAdmissions_Allocation = new global::System.Data.DataRelation("Admissions_Allocation", new global::System.Data.DataColumn[] {
                         this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableAllocation.AdmissionIDColumn}, false);
             this.Relations.Add(this.relationAdmissions_Allocation);
+            this.relationDoctors_Allocation = new global::System.Data.DataRelation("Doctors_Allocation", new global::System.Data.DataColumn[] {
+                        this.tableDoctors.DoctorIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAllocation.DoctorIDColumn}, false);
+            this.Relations.Add(this.relationDoctors_Allocation);
             this.relationAdmissions_Payments = new global::System.Data.DataRelation("Admissions_Payments", new global::System.Data.DataColumn[] {
                         this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
                         this.tablePayments.AdmissionIDColumn}, false);
             this.Relations.Add(this.relationAdmissions_Payments);
-            this.relationMedication_Prescriptions = new global::System.Data.DataRelation("Medication_Prescriptions", new global::System.Data.DataColumn[] {
-                        this.tableMedication.MedicationIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePrescriptions.MedicationNameColumn}, false);
-            this.Relations.Add(this.relationMedication_Prescriptions);
-            this.relationAdmissions_Prescriptions = new global::System.Data.DataRelation("Admissions_Prescriptions", new global::System.Data.DataColumn[] {
-                        this.tableAdmissions.AdmissionIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePrescriptions.AdmissionIDColumn}, false);
-            this.Relations.Add(this.relationAdmissions_Prescriptions);
-            this.relationResearch_Topic_Research_Project = new global::System.Data.DataRelation("Research Topic_Research Project", new global::System.Data.DataColumn[] {
-                        this.tableResearch_Topic.ResearchTopicIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableResearch_Project.ResearchTopicIDColumn}, false);
-            this.Relations.Add(this.relationResearch_Topic_Research_Project);
             this.relationDoctors_Research_Project = new global::System.Data.DataRelation("Doctors_Research Project", new global::System.Data.DataColumn[] {
                         this.tableDoctors.DoctorIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableResearch_Project.DoctorIDColumn}, false);
             this.Relations.Add(this.relationDoctors_Research_Project);
+            this.relationResearch_Topic_Research_Project = new global::System.Data.DataRelation("Research Topic_Research Project", new global::System.Data.DataColumn[] {
+                        this.tableResearch_Topic.ResearchTopicIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableResearch_Project.ResearchTopicIDColumn}, false);
+            this.Relations.Add(this.relationResearch_Topic_Research_Project);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -862,12 +808,6 @@ namespace StAlbertHospitalAssessment {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private bool ShouldSerializePayments() {
-            return false;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private bool ShouldSerializePrescriptions() {
             return false;
         }
         
@@ -1021,9 +961,6 @@ namespace StAlbertHospitalAssessment {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void PaymentsRowChangeEventHandler(object sender, PaymentsRowChangeEvent e);
-        
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public delegate void PrescriptionsRowChangeEventHandler(object sender, PrescriptionsRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public delegate void Research_ProjectRowChangeEventHandler(object sender, Research_ProjectRowChangeEvent e);
@@ -3044,315 +2981,6 @@ namespace StAlbertHospitalAssessment {
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
                 attribute2.FixedValue = "PaymentsDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class PrescriptionsDataTable : global::System.Data.TypedTableBase<PrescriptionsRow> {
-            
-            private global::System.Data.DataColumn columnPrescriptionID;
-            
-            private global::System.Data.DataColumn columnMedicationName;
-            
-            private global::System.Data.DataColumn columnPrescriptionDate;
-            
-            private global::System.Data.DataColumn columnAdmissionID;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PrescriptionsDataTable() {
-                this.TableName = "Prescriptions";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal PrescriptionsDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected PrescriptionsDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn PrescriptionIDColumn {
-                get {
-                    return this.columnPrescriptionID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn MedicationNameColumn {
-                get {
-                    return this.columnMedicationName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn PrescriptionDateColumn {
-                get {
-                    return this.columnPrescriptionDate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn AdmissionIDColumn {
-                get {
-                    return this.columnAdmissionID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PrescriptionsRow this[int index] {
-                get {
-                    return ((PrescriptionsRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event PrescriptionsRowChangeEventHandler PrescriptionsRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event PrescriptionsRowChangeEventHandler PrescriptionsRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event PrescriptionsRowChangeEventHandler PrescriptionsRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public event PrescriptionsRowChangeEventHandler PrescriptionsRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void AddPrescriptionsRow(PrescriptionsRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PrescriptionsRow AddPrescriptionsRow(MedicationRow parentMedicationRowByMedication_Prescriptions, System.DateTime PrescriptionDate, AdmissionsRow parentAdmissionsRowByAdmissions_Prescriptions) {
-                PrescriptionsRow rowPrescriptionsRow = ((PrescriptionsRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        null,
-                        PrescriptionDate,
-                        null};
-                if ((parentMedicationRowByMedication_Prescriptions != null)) {
-                    columnValuesArray[1] = parentMedicationRowByMedication_Prescriptions[0];
-                }
-                if ((parentAdmissionsRowByAdmissions_Prescriptions != null)) {
-                    columnValuesArray[3] = parentAdmissionsRowByAdmissions_Prescriptions[0];
-                }
-                rowPrescriptionsRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowPrescriptionsRow);
-                return rowPrescriptionsRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PrescriptionsRow FindByPrescriptionID(int PrescriptionID) {
-                return ((PrescriptionsRow)(this.Rows.Find(new object[] {
-                            PrescriptionID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                PrescriptionsDataTable cln = ((PrescriptionsDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new PrescriptionsDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal void InitVars() {
-                this.columnPrescriptionID = base.Columns["PrescriptionID"];
-                this.columnMedicationName = base.Columns["MedicationName"];
-                this.columnPrescriptionDate = base.Columns["PrescriptionDate"];
-                this.columnAdmissionID = base.Columns["AdmissionID"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            private void InitClass() {
-                this.columnPrescriptionID = new global::System.Data.DataColumn("PrescriptionID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPrescriptionID);
-                this.columnMedicationName = new global::System.Data.DataColumn("MedicationName", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnMedicationName);
-                this.columnPrescriptionDate = new global::System.Data.DataColumn("PrescriptionDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnPrescriptionDate);
-                this.columnAdmissionID = new global::System.Data.DataColumn("AdmissionID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnAdmissionID);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnPrescriptionID}, true));
-                this.columnPrescriptionID.AutoIncrement = true;
-                this.columnPrescriptionID.AutoIncrementSeed = -1;
-                this.columnPrescriptionID.AutoIncrementStep = -1;
-                this.columnPrescriptionID.AllowDBNull = false;
-                this.columnPrescriptionID.Unique = true;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PrescriptionsRow NewPrescriptionsRow() {
-                return ((PrescriptionsRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new PrescriptionsRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(PrescriptionsRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.PrescriptionsRowChanged != null)) {
-                    this.PrescriptionsRowChanged(this, new PrescriptionsRowChangeEvent(((PrescriptionsRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.PrescriptionsRowChanging != null)) {
-                    this.PrescriptionsRowChanging(this, new PrescriptionsRowChangeEvent(((PrescriptionsRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.PrescriptionsRowDeleted != null)) {
-                    this.PrescriptionsRowDeleted(this, new PrescriptionsRowChangeEvent(((PrescriptionsRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.PrescriptionsRowDeleting != null)) {
-                    this.PrescriptionsRowDeleting(this, new PrescriptionsRowChangeEvent(((PrescriptionsRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void RemovePrescriptionsRow(PrescriptionsRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                StAlbertDataSet ds = new StAlbertDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "PrescriptionsDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -7648,23 +7276,23 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public WardsRow WardsRow {
-                get {
-                    return ((WardsRow)(this.GetParentRow(this.Table.ParentRelations["Wards_Admissions"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["Wards_Admissions"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public PatientsRow PatientsRow {
                 get {
                     return ((PatientsRow)(this.GetParentRow(this.Table.ParentRelations["Patients_Admissions"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["Patients_Admissions"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public WardsRow WardsRow {
+                get {
+                    return ((WardsRow)(this.GetParentRow(this.Table.ParentRelations["Wards_Admissions"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Wards_Admissions"]);
                 }
             }
             
@@ -7726,17 +7354,6 @@ namespace StAlbertHospitalAssessment {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetWardIDNull() {
                 this[this.tableAdmissions.WardIDColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PrescriptionsRow[] GetPrescriptionsRows() {
-                if ((this.Table.ChildRelations["Admissions_Prescriptions"] == null)) {
-                    return new PrescriptionsRow[0];
-                }
-                else {
-                    return ((PrescriptionsRow[])(base.GetChildRows(this.Table.ChildRelations["Admissions_Prescriptions"])));
-                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7853,23 +7470,23 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public DoctorsRow DoctorsRow {
-                get {
-                    return ((DoctorsRow)(this.GetParentRow(this.Table.ParentRelations["Doctors_Allocation"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["Doctors_Allocation"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public AdmissionsRow AdmissionsRow {
                 get {
                     return ((AdmissionsRow)(this.GetParentRow(this.Table.ParentRelations["Admissions_Allocation"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["Admissions_Allocation"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public DoctorsRow DoctorsRow {
+                get {
+                    return ((DoctorsRow)(this.GetParentRow(this.Table.ParentRelations["Doctors_Allocation"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Doctors_Allocation"]);
                 }
             }
             
@@ -8274,17 +7891,6 @@ namespace StAlbertHospitalAssessment {
             public void SetCostNull() {
                 this[this.tableMedication.CostColumn] = global::System.Convert.DBNull;
             }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PrescriptionsRow[] GetPrescriptionsRows() {
-                if ((this.Table.ChildRelations["Medication_Prescriptions"] == null)) {
-                    return new PrescriptionsRow[0];
-                }
-                else {
-                    return ((PrescriptionsRow[])(base.GetChildRows(this.Table.ChildRelations["Medication_Prescriptions"])));
-                }
-            }
         }
         
         /// <summary>
@@ -8672,138 +8278,6 @@ namespace StAlbertHospitalAssessment {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class PrescriptionsRow : global::System.Data.DataRow {
-            
-            private PrescriptionsDataTable tablePrescriptions;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            internal PrescriptionsRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tablePrescriptions = ((PrescriptionsDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int PrescriptionID {
-                get {
-                    return ((int)(this[this.tablePrescriptions.PrescriptionIDColumn]));
-                }
-                set {
-                    this[this.tablePrescriptions.PrescriptionIDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int MedicationName {
-                get {
-                    try {
-                        return ((int)(this[this.tablePrescriptions.MedicationNameColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'MedicationName\' in table \'Prescriptions\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePrescriptions.MedicationNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime PrescriptionDate {
-                get {
-                    try {
-                        return ((global::System.DateTime)(this[this.tablePrescriptions.PrescriptionDateColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'PrescriptionDate\' in table \'Prescriptions\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePrescriptions.PrescriptionDateColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public int AdmissionID {
-                get {
-                    try {
-                        return ((int)(this[this.tablePrescriptions.AdmissionIDColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'AdmissionID\' in table \'Prescriptions\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tablePrescriptions.AdmissionIDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public MedicationRow MedicationRow {
-                get {
-                    return ((MedicationRow)(this.GetParentRow(this.Table.ParentRelations["Medication_Prescriptions"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["Medication_Prescriptions"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AdmissionsRow AdmissionsRow {
-                get {
-                    return ((AdmissionsRow)(this.GetParentRow(this.Table.ParentRelations["Admissions_Prescriptions"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["Admissions_Prescriptions"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsMedicationNameNull() {
-                return this.IsNull(this.tablePrescriptions.MedicationNameColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetMedicationNameNull() {
-                this[this.tablePrescriptions.MedicationNameColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsPrescriptionDateNull() {
-                return this.IsNull(this.tablePrescriptions.PrescriptionDateColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetPrescriptionDateNull() {
-                this[this.tablePrescriptions.PrescriptionDateColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsAdmissionIDNull() {
-                return this.IsNull(this.tablePrescriptions.AdmissionIDColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetAdmissionIDNull() {
-                this[this.tablePrescriptions.AdmissionIDColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
         public partial class Research_ProjectRow : global::System.Data.DataRow {
             
             private Research_ProjectDataTable tableResearch_Project;
@@ -8908,23 +8382,23 @@ namespace StAlbertHospitalAssessment {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public Research_TopicRow Research_TopicRow {
-                get {
-                    return ((Research_TopicRow)(this.GetParentRow(this.Table.ParentRelations["Research Topic_Research Project"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["Research Topic_Research Project"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public DoctorsRow DoctorsRow {
                 get {
                     return ((DoctorsRow)(this.GetParentRow(this.Table.ParentRelations["Doctors_Research Project"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["Doctors_Research Project"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public Research_TopicRow Research_TopicRow {
+                get {
+                    return ((Research_TopicRow)(this.GetParentRow(this.Table.ParentRelations["Research Topic_Research Project"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Research Topic_Research Project"]);
                 }
             }
             
@@ -10857,40 +10331,6 @@ namespace StAlbertHospitalAssessment {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public PaymentsRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public class PrescriptionsRowChangeEvent : global::System.EventArgs {
-            
-            private PrescriptionsRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PrescriptionsRowChangeEvent(PrescriptionsRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public PrescriptionsRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -13880,322 +13320,6 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class PrescriptionsTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.OleDb.OleDbDataAdapter _adapter;
-        
-        private global::System.Data.OleDb.OleDbConnection _connection;
-        
-        private global::System.Data.OleDb.OleDbTransaction _transaction;
-        
-        private global::System.Data.OleDb.OleDbCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public PrescriptionsTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected internal global::System.Data.OleDb.OleDbDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        internal global::System.Data.OleDb.OleDbConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.OleDb.OleDbCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        internal global::System.Data.OleDb.OleDbTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected global::System.Data.OleDb.OleDbCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.OleDb.OleDbDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Prescriptions";
-            tableMapping.ColumnMappings.Add("PrescriptionID", "PrescriptionID");
-            tableMapping.ColumnMappings.Add("MedicationName", "MedicationName");
-            tableMapping.ColumnMappings.Add("PrescriptionDate", "PrescriptionDate");
-            tableMapping.ColumnMappings.Add("AdmissionID", "AdmissionID");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM `Prescriptions` WHERE ((`PrescriptionID` = ?) AND ((? = 1 AND `MedicationName` IS NULL) OR (`MedicationName` = ?)) AND ((? = 1 AND `PrescriptionDate` IS NULL) OR (`PrescriptionDate` = ?)) AND ((? = 1 AND `AdmissionID` IS NULL) OR (`AdmissionID` = ?)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_PrescriptionID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "PrescriptionID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_MedicationName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MedicationName", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_MedicationName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MedicationName", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_PrescriptionDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "PrescriptionDate", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_PrescriptionDate", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "PrescriptionDate", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_AdmissionID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AdmissionID", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_AdmissionID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AdmissionID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.InsertCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO `Prescriptions` (`MedicationName`, `PrescriptionDate`, `AdmissionID`)" +
-                " VALUES (?, ?, ?)";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("MedicationName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MedicationName", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("PrescriptionDate", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "PrescriptionDate", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("AdmissionID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AdmissionID", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand = new global::System.Data.OleDb.OleDbCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE `Prescriptions` SET `MedicationName` = ?, `PrescriptionDate` = ?, `AdmissionID` = ? WHERE ((`PrescriptionID` = ?) AND ((? = 1 AND `MedicationName` IS NULL) OR (`MedicationName` = ?)) AND ((? = 1 AND `PrescriptionDate` IS NULL) OR (`PrescriptionDate` = ?)) AND ((? = 1 AND `AdmissionID` IS NULL) OR (`AdmissionID` = ?)))";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("MedicationName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MedicationName", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("PrescriptionDate", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "PrescriptionDate", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("AdmissionID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AdmissionID", global::System.Data.DataRowVersion.Current, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_PrescriptionID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "PrescriptionID", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_MedicationName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MedicationName", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_MedicationName", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "MedicationName", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_PrescriptionDate", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "PrescriptionDate", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_PrescriptionDate", global::System.Data.OleDb.OleDbType.Date, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "PrescriptionDate", global::System.Data.DataRowVersion.Original, false, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("IsNull_AdmissionID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AdmissionID", global::System.Data.DataRowVersion.Original, true, null));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.OleDb.OleDbParameter("Original_AdmissionID", global::System.Data.OleDb.OleDbType.Integer, 0, global::System.Data.ParameterDirection.Input, ((byte)(0)), ((byte)(0)), "AdmissionID", global::System.Data.DataRowVersion.Original, false, null));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private void InitConnection() {
-            this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::StAlbertHospitalAssessment.Properties.Settings.Default.StAlbertConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.OleDb.OleDbCommand[1];
-            this._commandCollection[0] = new global::System.Data.OleDb.OleDbCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT PrescriptionID, MedicationName, PrescriptionDate, AdmissionID FROM Prescri" +
-                "ptions";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(StAlbertDataSet.PrescriptionsDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual StAlbertDataSet.PrescriptionsDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            StAlbertDataSet.PrescriptionsDataTable dataTable = new StAlbertDataSet.PrescriptionsDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(StAlbertDataSet.PrescriptionsDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(StAlbertDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "Prescriptions");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_PrescriptionID, int Original_MedicationName, System.DateTime Original_PrescriptionDate, int Original_AdmissionID) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_PrescriptionID));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((object)(0));
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((int)(Original_MedicationName));
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((System.DateTime)(Original_PrescriptionDate));
-            this.Adapter.DeleteCommand.Parameters[5].Value = ((object)(0));
-            this.Adapter.DeleteCommand.Parameters[6].Value = ((int)(Original_AdmissionID));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int MedicationName, System.DateTime PrescriptionDate, int AdmissionID) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(MedicationName));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(PrescriptionDate));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(AdmissionID));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int MedicationName, System.DateTime PrescriptionDate, int AdmissionID, int Original_PrescriptionID, int Original_MedicationName, System.DateTime Original_PrescriptionDate, int Original_AdmissionID) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(MedicationName));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(PrescriptionDate));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(AdmissionID));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_PrescriptionID));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_MedicationName));
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(Original_PrescriptionDate));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_AdmissionID));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class Research_ProjectTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.OleDb.OleDbDataAdapter _adapter;
@@ -15342,8 +14466,6 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
         
         private PaymentsTableAdapter _paymentsTableAdapter;
         
-        private PrescriptionsTableAdapter _prescriptionsTableAdapter;
-        
         private Research_ProjectTableAdapter _research_ProjectTableAdapter;
         
         private Research_TopicTableAdapter _research_TopicTableAdapter;
@@ -15454,20 +14576,6 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public PrescriptionsTableAdapter PrescriptionsTableAdapter {
-            get {
-                return this._prescriptionsTableAdapter;
-            }
-            set {
-                this._prescriptionsTableAdapter = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
-            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
-            "a", "System.Drawing.Design.UITypeEditor")]
         public Research_ProjectTableAdapter Research_ProjectTableAdapter {
             get {
                 return this._research_ProjectTableAdapter;
@@ -15548,10 +14656,6 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                             && (this._paymentsTableAdapter.Connection != null))) {
                     return this._paymentsTableAdapter.Connection;
                 }
-                if (((this._prescriptionsTableAdapter != null) 
-                            && (this._prescriptionsTableAdapter.Connection != null))) {
-                    return this._prescriptionsTableAdapter.Connection;
-                }
                 if (((this._research_ProjectTableAdapter != null) 
                             && (this._research_ProjectTableAdapter.Connection != null))) {
                     return this._research_ProjectTableAdapter.Connection;
@@ -15595,9 +14699,6 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                 if ((this._paymentsTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._prescriptionsTableAdapter != null)) {
-                    count = (count + 1);
-                }
                 if ((this._research_ProjectTableAdapter != null)) {
                     count = (count + 1);
                 }
@@ -15618,15 +14719,6 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private int UpdateUpdatedRows(StAlbertDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._wardsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Wards.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._wardsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._patientsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Patients.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -15636,12 +14728,12 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._research_TopicTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Research_Topic.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._wardsTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Wards.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._research_TopicTableAdapter.Update(updatedRows));
+                    result = (result + this._wardsTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -15663,12 +14755,21 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._medicationTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Medication.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._research_TopicTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Research_Topic.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._medicationTableAdapter.Update(updatedRows));
+                    result = (result + this._research_TopicTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._research_ProjectTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Research_Project.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._research_ProjectTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -15681,21 +14782,12 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._prescriptionsTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Prescriptions.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._medicationTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Medication.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._prescriptionsTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
-            if ((this._research_ProjectTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Research_Project.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._research_ProjectTableAdapter.Update(updatedRows));
+                    result = (result + this._medicationTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -15718,14 +14810,6 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private int UpdateInsertedRows(StAlbertDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._wardsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Wards.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._wardsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._patientsTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Patients.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -15734,11 +14818,11 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._research_TopicTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Research_Topic.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._wardsTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Wards.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._research_TopicTableAdapter.Update(addedRows));
+                    result = (result + this._wardsTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -15758,11 +14842,19 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._medicationTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Medication.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._research_TopicTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Research_Topic.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._medicationTableAdapter.Update(addedRows));
+                    result = (result + this._research_TopicTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._research_ProjectTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Research_Project.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._research_ProjectTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -15774,19 +14866,11 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._prescriptionsTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Prescriptions.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._medicationTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Medication.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._prescriptionsTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
-            if ((this._research_ProjectTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Research_Project.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._research_ProjectTableAdapter.Update(addedRows));
+                    result = (result + this._medicationTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -15816,19 +14900,11 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._research_ProjectTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Research_Project.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._medicationTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Medication.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._research_ProjectTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._prescriptionsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Prescriptions.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._prescriptionsTableAdapter.Update(deletedRows));
+                    result = (result + this._medicationTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -15840,11 +14916,19 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._medicationTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Medication.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._research_ProjectTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Research_Project.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._medicationTableAdapter.Update(deletedRows));
+                    result = (result + this._research_ProjectTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._research_TopicTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Research_Topic.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._research_TopicTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -15864,11 +14948,11 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._research_TopicTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Research_Topic.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._wardsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Wards.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._research_TopicTableAdapter.Update(deletedRows));
+                    result = (result + this._wardsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -15877,14 +14961,6 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._patientsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._wardsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Wards.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._wardsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -15954,11 +15030,6 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
             }
             if (((this._paymentsTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._paymentsTableAdapter.Connection) == false))) {
-                throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
-                        "tring.");
-            }
-            if (((this._prescriptionsTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._prescriptionsTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -16061,15 +15132,6 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                     if (this._paymentsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._paymentsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._paymentsTableAdapter.Adapter);
-                    }
-                }
-                if ((this._prescriptionsTableAdapter != null)) {
-                    revertConnections.Add(this._prescriptionsTableAdapter, this._prescriptionsTableAdapter.Connection);
-                    this._prescriptionsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(workConnection));
-                    this._prescriptionsTableAdapter.Transaction = ((global::System.Data.OleDb.OleDbTransaction)(workTransaction));
-                    if (this._prescriptionsTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._prescriptionsTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._prescriptionsTableAdapter.Adapter);
                     }
                 }
                 if ((this._research_ProjectTableAdapter != null)) {
@@ -16180,10 +15242,6 @@ namespace StAlbertHospitalAssessment.StAlbertDataSetTableAdapters {
                 if ((this._paymentsTableAdapter != null)) {
                     this._paymentsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._paymentsTableAdapter]));
                     this._paymentsTableAdapter.Transaction = null;
-                }
-                if ((this._prescriptionsTableAdapter != null)) {
-                    this._prescriptionsTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._prescriptionsTableAdapter]));
-                    this._prescriptionsTableAdapter.Transaction = null;
                 }
                 if ((this._research_ProjectTableAdapter != null)) {
                     this._research_ProjectTableAdapter.Connection = ((global::System.Data.OleDb.OleDbConnection)(revertConnections[this._research_ProjectTableAdapter]));

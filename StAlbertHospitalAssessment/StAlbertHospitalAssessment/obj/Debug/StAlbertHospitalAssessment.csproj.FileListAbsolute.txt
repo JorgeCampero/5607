@@ -11,3 +11,6 @@ C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbert
 C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.pdb
 C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.Add_Admission.resources
 C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.Update_Admission.resources
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.Delete_Admission.resources
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.Add_Research_Project.resources
+C:\5607\StAlbertHospitalAssessment\StAlbertHospitalAssessment\obj\Debug\StAlbertHospitalAssessment.Remove_Prescription.resources
